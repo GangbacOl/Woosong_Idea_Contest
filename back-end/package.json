@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "idea_contest_2020_api",
+  "main": "server.js",
+  "repository": "https://github.com/SecretJuJu/idea_contest_2020_api",
+  "author": "secretjuju <tmdqh04033@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
