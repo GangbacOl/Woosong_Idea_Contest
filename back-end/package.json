@@ -7,8 +7,12 @@
   "author": "secretjuju <tmdqh04033@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "email-validator": "^2.0.4",
     "express": "^4.17.1",
+    "json-web-token": "^3.2.0",
     "mysql2": "^2.1.0",
+    "nodemon": "^2.0.4",
     "sequelize": "^6.3.4"
   }
 }

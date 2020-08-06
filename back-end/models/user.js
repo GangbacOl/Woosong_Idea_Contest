@@ -10,7 +10,7 @@ module.exports = (sequelize,DataTypes) => {
             primaryKey : true
         },
         account : { // 계정
-            type: DataTypes.STRING(50),
+            type: DataTypes.STRING(20),
             primaryKey : true,
         },
         passwd : { // 비밀번호
