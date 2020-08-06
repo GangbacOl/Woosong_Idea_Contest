@@ -1,0 +1,10 @@
+{
+    "db_connection" : { 
+        "username" : "idea",
+        "password" : "idea",
+        "database" : "idea",
+        "host" : "127.0.0.1",
+        "dialect" : "mysql",
+        "operatorsAliases" : false
+    }
+}
