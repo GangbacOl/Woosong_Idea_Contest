@@ -2,14 +2,32 @@ const User = require("../../../models/index").User
 const email_validator = require("email-validator");
 const Sequelize = require('sequelize'); 
 const Op = Sequelize.Op;
-const encrypt_config = require("../../../config/config.json").encrypt
+const pbkdf2 = require("pbkdf2")
+var crypto = require("crypto")
 
-var bkfd2Password = require('pbkdf2-password');
-var hasher = bkfd2Password();
+var generateRandom = function (min, max) {
+    var ranNum = Math.floor(Math.random()*(max-min+1)) + min;
+    return ranNum;
+}
 
+// checking passwd
+function generate_passwd_to_hash(passwd,callback){
+    crypto.randomBytes(64, (err, buf) => {
+        var iterator = generateRandom(40000,100000)
+        var salt = buf.toString('base64')
+        crypto.pbkdf2(passwd, salt, iterator, 64, 'sha512', (err, key) => {
+            key = key.toString('base64')
+            callback({
+                hash :key,
+                salt : salt,
+                iterator : iterator
+            })
+        });
+    });
+}
 exports.register = (req, res) => {
     const MAXOFACCOUNT=20,MAXOFPASSWD=20,MINOFPASSWD=8,MINOFACCOUNT=8,MAXOFDESCRIPTION=300;
-    const MINOFEMAIL=50,MAXOFNAME=30,MAXOFNICKNAME=20 // 입력값의 길이제한
+    const MAXOFEMAIL=50,MAXOFNAME=30,MAXOFNICKNAME=20 // 입력값의 길이제한
     // account 중복 체크, email 중복 체크, 닉네임 중복체크(null 가능)
     // account 길이 체크, passwd 길이체크, email형식 체크
 
@@ -19,7 +37,8 @@ exports.register = (req, res) => {
         console.log("register failed")
         res.status(409).json({
             result : false,
-            message: error.message
+            message: error.message,
+            code : error.code
         })
     }
     function createUser(){
@@ -27,52 +46,102 @@ exports.register = (req, res) => {
             const overlapCheck = (data) => { // type : array
                 if(data==!undefined || data.length != 0){
                     reject({"message" : "check { overlap with other user }"});
+                    thorw
                 }
             }
-            if( (passwd) == (passwd_repeat))
+            
+            // length check
+            if( (passwd) !== (passwd_repeat)){
+                reject({
+                    "message" : "check { can't match with passwd & passwd_repeat }",
+                    "code" : 1
+                })
+                return;
+            }
             if (( account.length <= MINOFACCOUNT || MAXOFACCOUNT <= account.length )){
-                reject({"message" : "check { length of account }"})
+                reject({
+                    "message" : "check { length of account }",
+                    "code" : 2
+                })
+                return;
             }
-
             if (( passwd.length <= MINOFPASSWD || MAXOFPASSWD <= passwd.length )){
-                reject({"message" : "check { length of password }"})
+                reject({
+                    "message" : "check { length of password }",
+                    "code" : 3
+                })
+                return;
             }
-
             if (!(email_validator.validate(req.body.email))){
-                reject({"message" : "check { email validator }"})
+                reject({
+                    "message" : "check { email validator }",
+                    "code" : 4
+                })
+                return;
             }
-
-            console.log(User)
+            if (description.length > 300){
+                reject({
+                    "message": "the length of description is too long",
+                    "code" : 5
+                })
+                return;
+            }
+            if ( email.length > MAXOFEMAIL){
+                reject({
+                    "message": "the length of email is too long",
+                    "code" : 6
+                })
+                return;
+            }
+            if ( MAXOFNAME <= name.length){
+                reject({
+                    "message" : "name is too long",
+                    "code" : 7
+                })
+                return;
+            }
+            if(MAXOFNICKNAME <= nickname.length){
+                reject({
+                    "message" : "nickname is too long",
+                    "code" : 8
+                })
+                return;
+            }
 
             User.findAll({where: {[Op.or]: [{account: account}, {email: email},{nickname:nickname}]}})
+            .then(overlapCheck) 
             .then(()=>{
                 console.log("able to make account")
                 // user create
-
                 // password 암호화
-                salt = encrypt_config.salt
-                hasher({password: passwd}, (err, passwd, salt, hash) => {
-                    console.log(hash)
-                });
-                // User.create({
-                //     account : account,
-                //     passwd : passwd,
-                //     email : email,
-                //     name : name,
-                //     nickname : nickname,
-                //     description : description
-                // })
+                generate_passwd_to_hash(passwd,(data)=>{
+                    User.create({
+                        account : account,
+                        passwd : data.hash,
+                        salt : data.salt,
+                        iterator : data.iterator,
+                        email : email,
+                        name : name,
+                        nickname : nickname,
+                        description : description
+                    }).then(result => {
+                        resolve(result)
+                    }).catch(err => {
+                        reject(err);
+                    });
+                })
             })
-            .then(overlapCheck) 
             .catch(err => {
-                console.log(err)
-                res.send(err)
+                return
             })   
         })
     }
 
-    createUser().then().catch(err=>{
-        console.log(err)
-        res.json(err)
+    createUser().then((result)=>{
+        res.json({
+            result : true
+        })
+    }).catch(err=>{
+        onError(err)
     })
 }

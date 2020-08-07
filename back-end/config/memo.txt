@@ -1,5 +1,5 @@
-DB
-    user : idx, account, passwd, profile_image, email, name, nickname, description // 간단한 내 소개
+DB tables
+    user : idx, account, passwd, profile_image, email, name, nickname, description // 간단한 내 소개, salt, iterator
     category : idx, category_name, description, follower,post_count // 포스트의 개수 (필요없을듯)
     post : idx, title, paragraph, image //10가 최대, category_idx,user_idx
     chat : idx, post_idx,comment, user_idx

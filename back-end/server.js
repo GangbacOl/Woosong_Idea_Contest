@@ -20,6 +20,7 @@ crypto.randomBytes(64, (err, buf) => {
         jwt_secret = key.toString('base64'); // jwt secret is random
     });
 });
+// set jwt_secret <= this is random
 console.log("jwt_secret : "+jwt_secret);
 
 

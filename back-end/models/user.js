@@ -14,7 +14,15 @@ module.exports = (sequelize,DataTypes) => {
             primaryKey : true,
         },
         passwd : { // 비밀번호
-            type :DataTypes.STRING(50),
+            type :DataTypes.STRING(88),
+            allowNull : false
+        },
+        salt : {
+            type : DataTypes.STRING(88),
+            allowNull : false
+        },
+        iterator:{
+            type : DataTypes.INTEGER,
             allowNull : false
         },
         profile_image : { // 프로필사진이 저장된 경로
