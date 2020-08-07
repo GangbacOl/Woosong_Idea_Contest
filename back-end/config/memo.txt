@@ -5,5 +5,5 @@ DB tables
     chat : idx, post_idx,comment, user_idx
     user_follow : idx, user_idx //팔로우를 신청한 유저, target_user_id//팔로우를 당한 유저
     category_follow : idx, user_idx, category_idx
-    email_verified : idx, email, verified // boolean
-    member_auth_email : idx, user_idx, mail_key, mail_type, mail_use_datetime
+    email_verified : idx, email, verified // boolean, verify_code
+    

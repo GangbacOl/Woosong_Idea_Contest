@@ -8,4 +8,5 @@ var sequelize = new Sequelize(db_config.database, db_config.username, db_config.
 db.sequelize = sequelize; 
 db.Sequelize = Sequelize; 
 db.User = require('./user')(sequelize, Sequelize); 
+db.Email_verified = require('./Email_verified')(sequelize, Sequelize); 
 module.exports = db;
