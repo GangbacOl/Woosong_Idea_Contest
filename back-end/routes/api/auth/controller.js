@@ -184,11 +184,4 @@ exports.register = (req, res) => {
 }
 
 
-// method : get
-// exports.get_email_verified = (req,res) =>{
-//     const {email} = req.body 
-
-// }
-
-
 

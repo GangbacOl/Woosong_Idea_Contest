@@ -6,6 +6,7 @@
     method : get
     request 방식 
     /api/mail/send_auth_mail/:email
+    ex) /api/mail/send_auth_mail/example@gmail.com
     
     response 방식
     {
