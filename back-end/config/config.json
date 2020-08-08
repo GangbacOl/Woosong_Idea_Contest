@@ -1,0 +1,21 @@
+{
+    "db_connection" : { 
+        "username" : "idea",
+        "password" : "idea",
+        "database" : "idea",
+        "host" : "127.0.0.1",
+        "dialect" : "mysql",
+        "timezone": "+09:00"
+    },
+    "encrypt" : {
+        "salt" : "dsfghyu5rduytf"
+    },
+    "mailer" : {
+        "service":"gmail",
+        "host" : "smtp.gmlail.com",
+        "port" : "587",
+        "user" : "ideamail19@gmail.com",
+        "pass" : "ideamailpass"
+    }
+    
+}
