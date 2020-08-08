@@ -1,5 +1,5 @@
 import React from 'react';
-import InputMolecule from '../molecules/InputMolecule';
+import InputMolecule from '../../molecules/auth/InputMolecule';
 
 const LoginOrganism = () => {
     return (
