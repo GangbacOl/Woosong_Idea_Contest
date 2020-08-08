@@ -1,6 +1,6 @@
 import React from 'react';
-import LabelAtom from '../atoms/LabelAtom';
-import InputAtom from '../atoms/InputAtom';
+import LabelAtom from '../../atoms/LabelAtom';
+import InputAtom from '../../atoms/InputAtom';
 
 const InputMolecule = ({ htmlFor, LabelContent, type, value }) => {
     return (
