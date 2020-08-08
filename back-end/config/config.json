@@ -5,11 +5,17 @@
         "database" : "idea",
         "host" : "127.0.0.1",
         "dialect" : "mysql",
-        "operatorsAliases" : false
+        "timezone": "+09:00"
     },
     "encrypt" : {
-        "salt" : "1qazxdsew234erdcfgtr456ygbhnjuy678ijnmk"
-        
+        "salt" : "dsfghyu5rduytf"
+    },
+    "mailer" : {
+        "service":"gmail",
+        "host" : "smtp.gmlail.com",
+        "port" : "587",
+        "user" : "ideamail19@gmail.com",
+        "pass" : "ideamailpass"
     }
     
 }

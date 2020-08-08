@@ -1,0 +1,21 @@
+{
+    "db_connection" : { 
+        "username" : "your db user",
+        "password" : "your spassword",
+        "database" : "your database", 
+        "host" : "127.0.0.1",
+        "dialect" : "mysql",
+        "operatorsAliases" : false
+    },
+    "encrypt" : {
+        "salt" : "salt!"
+    },
+    "mailer" : {
+        "service":"mail type ex) Gmail",
+        "host" : "host",
+        "port" : "port ex) 123",
+        "user" : "your mail ex) example@gmail.com",
+        "pass" : "pass of your mail"
+    }
+    
+}
