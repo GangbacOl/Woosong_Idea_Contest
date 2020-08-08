@@ -1,8 +1,8 @@
 import React from 'react';
-import IntroMolecule from '../molecules/IntroMolecule';
-import LoginForm from '../organisms/LoginOrganism';
-import InputAtom from '../atoms/InputAtom';
-import LinkAtom from '../atoms/LinkAtom';
+import IntroMolecule from '../../molecules/auth/IntroMolecule';
+import LoginForm from '../../organisms/auth/LoginOrganism';
+import InputAtom from '../../atoms/InputAtom';
+import LinkAtom from '../../atoms/LinkAtom';
 
 const LoginTemplate = () => {
     return (
