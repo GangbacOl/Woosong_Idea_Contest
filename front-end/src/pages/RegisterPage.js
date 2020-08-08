@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterTemplate from '../components/templates/RegisterTemplate';
+import RegisterTemplate from '../components/templates/auth/RegisterTemplate';
 
 const RegisterPage = () => {
     return (
