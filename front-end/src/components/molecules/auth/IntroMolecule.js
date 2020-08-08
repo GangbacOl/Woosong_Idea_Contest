@@ -1,6 +1,6 @@
 import React from 'react';
-import Heading2Atom from '../atoms/Heading2Atom';
-import ParagraphAtom from '../atoms/ParagraphAtom';
+import Heading2Atom from '../../atoms/Heading2Atom';
+import ParagraphAtom from '../../atoms/ParagraphAtom';
 
 const IntroMolecule = ({ h2Content, pContent }) => {
     return (
