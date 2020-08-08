@@ -1,7 +1,7 @@
 # Auth api
 
 ### /api/auth/register
-    // 0807 기준 이메일 인증이 구현돼지 않음
+    
     method : post
     request 방식
     {
@@ -37,3 +37,27 @@
         7 : name의 길이가 형식에 맞지않음
         8 : nickname의 길이가 형식에 맞지않음
         9 : email이 인증되지 안음
+    
+### /api/auth/login
+
+    method : post
+    request 방식
+    {
+        "account" : "your_account",
+        "passwd" : "your_passwd"
+    }
+
+    response 방식
+
+    {
+        "result" : [boolean],
+        "token" : [string] // result 가 true일때
+        "code" : [int] // result 가 false일때
+    }
+
+    codes
+        1 : account가 없을때
+        2 : 서버에러
+        3 : 비밀번호 불일치 
+        4 : 비밀번호 정보를 받지않음
+        5 : jwt의 알 수 없는 에러 ( 백엔드개발자에게 request payload와 함께 제보바람)

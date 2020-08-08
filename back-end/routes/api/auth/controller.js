@@ -4,7 +4,8 @@ const email_validator = require("email-validator");
 const Sequelize = require('sequelize'); 
 const Op = Sequelize.Op;
 var crypto = require("crypto");
-
+const user = require("../../../models/user");
+const jwt = require("jsonwebtoken")
 
 
 var generateRandom = function (min, max) {
@@ -183,5 +184,87 @@ exports.register = (req, res) => {
     })
 }
 
+exports.login = (req,res) => {
+    const {account} = req.body
+    var user_passwd = req.body.passwd
+    const secret = req.app.get('jwt-secret')
+
+    const check = (result) => {
+        
+        if (result === null){
+            res.json({
+                result:false,
+                code : 1
+            })
+            return
+        }
+        console.log(user_passwd)
+        const {salt,iterator,passwd} = result.dataValues;
+        crypto.pbkdf2(user_passwd, salt, iterator, 64, 'sha512', (err1, key) => {
+            user_passwd = key.toString('base64')
+            if(user_passwd === passwd) {
+                // create a promise that generates jwt asynchronously
+                const p = new Promise((resolve, reject) => {
+                    const {idx,account,profile_image,email,name,nickname} = result.dataValues
+                    jwt.sign(
+                        {
+                            idx,
+                            account,
+                            profile_image,
+                            email,
+                            name,
+                            nickname
+                        }, 
+                        secret, 
+                        {
+                            expiresIn: '7d',
+                            subject: 'userInfo'
+                        }, (err, token) => {
+                            if (err) {
+                                console.log(err)
+                                res.json({
+                                    result : false,
+                                    code : 5
+                                })
+                                reject()
+                                return
+                            }
+                            else {
+                                console.log(token)
+                                res.json({
+                                    result: true,
+                                    token
+                                })
+                                resolve()
+                                return
+                            }
+                        })
+                })
+                return p
+            } else {
+                res.json({
+                    result : false,
+                    code : 3
+                })
+            }
+
+        });
+        
+        
+    }
 
 
+    User.findOne({
+        where : {
+            account : account
+        }
+    })
+    .then(check)
+    .catch(err =>{
+        console.log(err)
+        res.json({
+            result:false,
+            code : 5
+        })
+    })
+}
