@@ -4,6 +4,7 @@ const sequelize = require('./models/index').sequelize;
 var bodyParser = require('body-parser')
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser');
 
 const PORT = 3000
 
@@ -11,6 +12,8 @@ const PORT = 3000
 app.use(bodyParser.json())
 app.use(express.static('public'));
 app.use('/api', require('./routes/index'))
+app.use(cookieParser());
+
 
 
 

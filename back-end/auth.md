@@ -1,5 +1,9 @@
 # Auth api
 
+## login에서 받은 token
+
+    /api/auth/login 에서 로그인을 성공하여 받은 token 은 Authorization 헤더에 삽입
+
 ### /api/auth/register
     
     method : post
@@ -61,3 +65,9 @@
         3 : 비밀번호 불일치 
         4 : 비밀번호 정보를 받지않음
         5 : jwt의 알 수 없는 에러 ( 백엔드개발자에게 request payload와 함께 제보바람)
+
+### auth
+
+    로그인이 필요한 서비스를 이용할때 로그인이 되어있지 않다면 
+    
+    res.redirect("/") // 토큰만료도 포함
