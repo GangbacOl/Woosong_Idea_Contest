@@ -1,7 +1,7 @@
 import React from 'react';
-import IntroMolecule from '../molecules/IntroMolecule';
-import RegisterForm from '../organisms/RegisterOrganism';
-import InputAtom from '../atoms/InputAtom';
+import IntroMolecule from '../../molecules/auth/IntroMolecule';
+import RegisterForm from '../../organisms/auth/RegisterOrganism';
+import InputAtom from '../../atoms/InputAtom';
 
 const RegisterTemplate = () => {
     return (
