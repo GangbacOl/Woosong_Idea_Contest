@@ -6,6 +6,7 @@ const post = require('./api/post')
 router.use('/auth', auth)
 router.use('/mail', mail)
 router.use("/post", post)
+router.use("/category", post)
 
 
 module.exports = router
