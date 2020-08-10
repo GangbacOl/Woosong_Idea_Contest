@@ -3,7 +3,7 @@
 
     comment : 사용자가 이메일인증코드를 요청할때 사용, 재사용대기시간 : 15초
 
-    method : get
+    method : post
     request 방식 
     /api/mail/send_auth_mail/:email
     ex) /api/mail/send_auth_mail/example@gmail.com
