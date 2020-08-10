@@ -1,9 +1,14 @@
 DB tables
+-- 현재 구현된 DB
     user : idx, account, passwd, profile_image, email, name, nickname, description // 간단한 내 소개, salt, iterator
-    category : idx, category_name, description, follower,post_count // 포스트의 개수 (필요없을듯)
+    email_verified : idx, email, verified (boolean), verify_code
+
+-- 아직 구현되지 않은 DB
+    category : idx, category_name, description
+    request_category : idx, user_idx, category_name, description, reason
     post : idx, title, paragraph, image //10가 최대, category_idx,user_idx
+    
     chat : idx, post_idx,comment, user_idx
     user_follow : idx, user_idx //팔로우를 신청한 유저, target_user_id//팔로우를 당한 유저
     category_follow : idx, user_idx, category_idx
-    email_verified : idx, email, verified (boolean), verify_code
     
