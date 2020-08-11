@@ -9,27 +9,26 @@
     method : post
     request 방식
     {
-        "account" : "guest1aaa",
-        "passwd" : "a1b2csssss3",
-        "passwd_repeat":"a1b2csssss3",
-        "email" : "example@gmail.com",
-        "name" : "홍길동",
-        "nickname": "오홍홍",
-        "description":"hello"
+        "account" : [string] ,
+        "passwd" : [string],
+        "passwd_repeat":[string],
+        "email" : [string],
+        "name" : [string],
+        "nickname": [string],
+        "description": [string]
     }
     
-    response - success
-    {
-        result : true
-    }
 
-    response - failed
+    response 방식
     {
-        "result": false,
-        "message": "check { overlap with other user }"
+        "result": [boolean],
+        "message": [string] // "check { overlap with other user }"
         code : [int] // 각각의 에러에따라 코드와 메시지가 다름
         //코드가 없는경우 message 참고
     }
+    길이제한
+        MAXOFACCOUNT=20,MAXOFPASSWD=20,MINOFPASSWD=8,MINOFACCOUNT=5,MAXOFDESCRIPTION=300;
+        MAXOFEMAIL=50,MAXOFNAME=30,MAXOFNICKNAME=20 
 
     codes
         1 : passwd 와 passwd_repeat가 같지 않음
@@ -47,8 +46,8 @@
     method : post
     request 방식
     {
-        "account" : "your_account",
-        "passwd" : "your_passwd"
+        "account" : [string],
+        "passwd" : [string]
     }
 
     response 방식
@@ -70,4 +69,4 @@
 
     로그인이 필요한 서비스를 이용할때 로그인이 되어있지 않다면 
     
-    res.redirect("/") // 토큰만료도 포함
+    res.redirect("/") // 토큰만료도 포함 // 다른 방법을 찾는중

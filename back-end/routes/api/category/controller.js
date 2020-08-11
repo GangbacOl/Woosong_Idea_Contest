@@ -3,7 +3,7 @@
 
 // example code//////////
 
-exports.get_category = (req,res) =>{
+exports.get_categories = (req,res) =>{
     res.json({
         result : true,
         msg : "example code"

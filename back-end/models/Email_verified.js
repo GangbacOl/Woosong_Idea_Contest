@@ -19,7 +19,7 @@ module.exports = (sequelize,DataTypes) => {
             defaultValue: false
         },
         verify_code : {
-            type: DataTypes.STRING(50),
+            type: DataTypes.STRING(5),
             allowNull : false
         }
     })

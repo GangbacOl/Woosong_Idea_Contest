@@ -19,7 +19,7 @@ const authMiddleware = (req, res, next) => {
     )
 
     // if it has failed to verify, it will return an error message
-    const onError = (error) => {
+    const onError = (error) => {    
         res.redirect("/")
     }
 

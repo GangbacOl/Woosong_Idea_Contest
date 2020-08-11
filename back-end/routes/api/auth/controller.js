@@ -4,7 +4,6 @@ const email_validator = require("email-validator");
 const Sequelize = require('sequelize'); 
 const Op = Sequelize.Op;
 var crypto = require("crypto");
-const user = require("../../../models/user");
 const jwt = require("jsonwebtoken")
 
 
@@ -46,7 +45,7 @@ const check_email_verified = (email,callback) => {
 
 // method : post
 exports.register = (req, res) => {
-    const MAXOFACCOUNT=20,MAXOFPASSWD=20,MINOFPASSWD=8,MINOFACCOUNT=8,MAXOFDESCRIPTION=300;
+    const MAXOFACCOUNT=20,MAXOFPASSWD=20,MINOFPASSWD=8,MINOFACCOUNT=7,MAXOFDESCRIPTION=300;
     const MAXOFEMAIL=50,MAXOFNAME=30,MAXOFNICKNAME=20 // 입력값의 길이제한
     // account 중복 체크, email 중복 체크, 닉네임 중복체크(null 가능)
     // account 길이 체크, passwd 길이체크, email형식 체크

@@ -3,10 +3,8 @@ const controller = require('./controller')
 const authMiddleware = require('../../../middlewares/auth/auth')
 
 
-// example code
-
-
-router.get("/category/get_categories",authMiddleware);
-router.get("/category/get_categories",controller.get_categories);
+router.get("/",(req,res)=>{res.json({result : true})})
+//router.get("/get_info/:idx",authMiddleware)
+router.get("/get_info/:idx",controller.get_info)
 
 module.exports = router

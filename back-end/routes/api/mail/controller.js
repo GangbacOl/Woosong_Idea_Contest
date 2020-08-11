@@ -18,9 +18,9 @@ var transporter = nodemailer.createTransport(smtpTransport({
 
 const make_random_key = () => {
     var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@-=<>";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    for( var i=0; i < 50; i++ )
+    for( var i=0; i < 5; i++ )
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
@@ -65,7 +65,7 @@ const send_mail = (mailOptions,callback) => {
 exports.send_auth_mail =(req,res) => { // 이메일 인증코드를 이메일로 보내고 결과를 리턴
     // 1분이내에 요청한 메일로 메일을 보낸적이 있는지 확인하여 1분이 지났나있다면 
     // 혹은 요청한 메일이 없대면 메일 발송
-    const {email} = req.params;
+    const {email} = req.body;
     if(!(email_validator.validate(email))){
         res.json({result:false,code : 1})
         return;
