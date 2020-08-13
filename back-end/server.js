@@ -5,21 +5,17 @@ var bodyParser = require('body-parser')
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser');
-
+const cors = require("cors")
 const PORT = 3000
 
-
+app.use(cors())
 app.use(bodyParser.json())
 app.use(express.static('public'));
 app.use('/api', require('./routes/index'))
 app.use(cookieParser());
 
-// 파일업로드 크기제한
-app.use(bodyParser.json({limit: '10mb', extended: true}))
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 
-
-
+/* 배포시 적용
 var jwt_secret = crypto.createHash('sha256').update(Math.random().toString()).digest('base64');
 crypto.randomBytes(64, (err, buf) => {
     crypto.pbkdf2(jwt_secret, buf.toString('base64'), 671321 , 64, 'sha512', (err, key) => {
@@ -27,6 +23,9 @@ crypto.randomBytes(64, (err, buf) => {
         app.set('jwt-secret', jwt_secret);
     });
 });
+*/
+const jwt_secret = "ABCD"
+app.set("jwt-secret",jwt_secret)
 
 
 // set jwt_secret <= this is random
