@@ -14,6 +14,9 @@ app.use(express.static('public'));
 app.use('/api', require('./routes/index'))
 app.use(cookieParser());
 
+// 파일업로드 크기제한
+app.use(bodyParser.json({limit: '10mb', extended: true}))
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 
 
 
