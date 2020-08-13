@@ -28,5 +28,7 @@ router.get("/get_info/:idx",controller.get_info)
 //     res.send(req.file)
 // });
 
+router.get("/search_with_nickname/:nickanme",controller.search_with_nickname)
+
 
 module.exports = router

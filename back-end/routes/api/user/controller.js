@@ -71,3 +71,42 @@ exports.update_profile_image = (req,res) => {
     })
     */
 }
+
+
+
+
+
+// search user with nickname
+exports.search_with_nickname = (req,res) => {
+    const {nickname} = req.params;
+    if (!nickname) res.json({result:false,code :2})
+    User.findOne({
+        where : {
+            nickname : nickname
+        }
+    })
+    .then(result => {
+        if (result) {
+            const {idx, nickname,profile_image,description } = result.dataValues
+            res.json({
+                result : true, // user exist
+                idx,
+                nickname,
+                profile_image,
+                description 
+            })
+        }
+        else {
+            res.json({
+                result:false,
+                code : 1 // can't find user
+            })
+        }
+    })
+    .catch(err => {
+        res.json({
+            result : false,
+            code : 3 // unexpected error
+        })
+    })
+}
